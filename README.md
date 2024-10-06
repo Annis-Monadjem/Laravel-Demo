@@ -15,5 +15,5 @@ To demonstrate my ability to setup Laravel on local machine and to code CRUDE op
 1. On command-line execute:
    - npm run dev
    - php artisan serve
-2. Open brownser and navigate to http://127.0.0.1:8000
+2. Open browser and navigate to http://127.0.0.1:8000
   
