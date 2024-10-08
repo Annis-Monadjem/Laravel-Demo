@@ -1,4 +1,4 @@
-<x-registerLayout>
+<x-authLayout>
     <div class="sign_header">
         <div class="sign_title">
             <h1>fakeface</h1>
@@ -14,4 +14,4 @@
             <button class="btn-action">Create new account</button>
         </div>
     </div>
-</x-registerLayout>
+</x-authLayout>
