@@ -1,17 +1,17 @@
-<!DOCTYPE html>
-<html lang="en-US">
-
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    @vite(['resources/css/app.css', 'resources/css/normalize.css', 'resources/js/app.js'])
-    <title>Laravel Demo</title>
-  </head>
-
-  <body>
-    <main>
-    </main>
-  </body>
-
-</html>
+<x-registerLayout>
+    <div class="sign_header">
+        <div class="sign_title">
+            <h1>fakeface</h1>
+            <h3>Connect with friends and the world around you on Fakeface.</h3>
+        </div>
+        <div class="sign_body">
+            <form action="#" method="POST">
+                <p><input type="text" placeholder="Email or phone number" name="email-phone"></p>
+                <p><input type="password" placeholder="Password" name="password"></p>
+                <button type="submit">Log In</button>
+            </form>
+            <p><a href="#">Forgot Password?</a></p>
+            <button class="btn-action">Create new account</button>
+        </div>
+    </div>
+</x-registerLayout>

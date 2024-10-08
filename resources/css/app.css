@@ -4,38 +4,145 @@
     Tablet (768px = 48em)
     Tablet Landscape (1024px = 64em)
     Laptop (1440px = 90em)
-    Really large screens ( >= 2000 = 125 em)
+    Really large screens ( >= 2000px = 125 em)
 */
 
+/* Mobile First:
+Mobile (640px = 40em) */
 *,
 *::before,
 *::after {
     box-sizing: inherit;
+    margin: 0;
+    padding: 0;
 }
-
 html {
     box-sizing: border-box;
     font-size: 62.5%; /* 1rem = 10px */
+    height: 100vh;
+    display: grid;
+    place-content: center;
 }
-
-@media only screen and (max-width: 64em) {
-    html {
-        font-size: 50%;
-    }
-}
-
-@media only screen and (min-width: 125em) {
-    html {
-        font-size: 75%;
-    }
-}
-
 body {
     font-size: 1.4rem;
     font-family: Aria, Helvetica, sans-serif;
-    height: 100vh;
+}
+.sign_header {
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
+}
+.sign_title {
+    justify-content: center;
+    & h1 {
+        justify-self: flex-start;
+        color: hsl(214, 89%, 52%);
+        font-size: 6rem;
+    }
+    & h3 {
+        font-size: 2rem;
+        font-weight: 300;
+        max-width: 80%;
+        margin: 0 auto;
+    }
+}
+.sign_body {
+    display: flex;
+    flex-direction: column;
+    & * {
+        margin: 2px auto;
+    }
 }
 
-main {
-    margin: 0 auto;
+/* Common Elements */
+a {
+    text-decoration: none;
+    display: block;
+    width: 180px;
+    height: 17px;
+    line-height: 17px;
+    &:hover,
+    &:active,
+    &:focus {
+        text-decoration: underline;
+        outline: 1px solid #1877f2;
+        border-radius: 2px;
+        outline-offset: 2px;
+    }
+}
+button {
+    padding: 5px 9px;
+    width: 180px;
+    height: 35px;
+    border: none;
+    border-radius: 2px;
+    outline: 0px solid transparent;
+    color: white;
+    font-weight: 500;
+    background-color: #0866ff;
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: #1877f2;
+        outline: 1px solid #1877f2;
+        outline-offset: 2px;
+    }
+}
+.btn-action {
+    background-color: #42b72a;
+    &:hover,
+    &:active,
+    &:focus {
+        background-color: #36a420;
+        outline: 1px solid #36a420;
+        outline-offset: 2px;
+    }
+}
+input {
+    padding: 5px 9px;
+    width: 180px;
+    height: 35px;
+    border-radius: 2px;
+    outline: 0px solid transparent;
+    border: none;
+    &:hover,
+    &:active,
+    &:focus {
+        outline: 1px solid #1877f2;
+        outline: 1px solid #1877f2;
+        outline-offset: 2px;
+    }
+}
+
+/* Tablet (768px = 48em) and Larger */
+@media only screen and (min-width: 48em) {
+    .sign_header {
+        flex-direction: row;
+        align-items: baseline;
+    }
+    .sign_title {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        & h3 {
+            margin: 0;
+            text-align: left;
+        }
+    }
+    .sign_body {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+}
+/* Tablet Landscape (1024px = 64em) and Larger */
+@media only screen and (min-width: 64em) {
+}
+/* Laptop (1440px = 90em) and Larger */
+@media only screen and (min-width: 90em) {
+}
+/* Really large screens ( >= 2000px = 125 em) */
+@media only screen and (min-width: 125em) {
 }
