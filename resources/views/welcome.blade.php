@@ -11,7 +11,7 @@
                 <button type="submit">Log In</button>
             </form>
             <p><a href="#">Forgot Password?</a></p>
-            <button class="btn-action">Create new account</button>
+            <a href="/register" class="btn btn-action">Create new account</a>
         </div>
     </div>
 </x-authLayout>
