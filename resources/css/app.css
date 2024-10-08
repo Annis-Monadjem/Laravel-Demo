@@ -1,10 +1,38 @@
+/*
+  Breakpoints:
+    Mobile (640px = 40em)
+    Tablet (768px = 48em)
+    Tablet Landscape (1024px = 64em)
+    Laptop (1440px = 90em)
+    Really large screens ( >= 2000 = 125 em)
+*/
+
 *,
 *::before,
 *::after {
+    box-sizing: inherit;
+}
+
+html {
     box-sizing: border-box;
+    font-size: 62.5%; /* 1rem = 10px */
+}
+
+@media only screen and (max-width: 64em) {
+    html {
+        font-size: 50%;
+    }
+}
+
+@media only screen and (min-width: 125em) {
+    html {
+        font-size: 75%;
+    }
 }
 
 body {
+    font-size: 1.4rem;
+    font-family: Aria, Helvetica, sans-serif;
     height: 100vh;
 }
 
