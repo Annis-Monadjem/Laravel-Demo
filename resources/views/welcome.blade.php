@@ -10,7 +10,7 @@
                 <p><input type="password" placeholder="Password" name="password"></p>
                 <button type="submit">Log In</button>
             </form>
-            <p><a href="#">Forgot Password?</a></p>
+            <p><a href="#" class="btn-plain">Forgot Password?</a></p>
             <a href="/register" class="btn btn-action">Create new account</a>
         </div>
     </div>
