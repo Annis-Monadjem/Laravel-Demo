@@ -411,9 +411,24 @@ a {
      +640px = 40em: Large Phones
      ------------------------------------------------------------------------- */
 @media only screen and (min-width: 40em) {
+}
+
+/* MEDIA QUERIES -------------------------------------------------------------
+     +768px = 48em: Tablets - medium devices
+     ------------------------------------------------------------------------- */
+@media only screen and (min-width: 48em) {
+}
+
+/* MEDIA QUERIES -------------------------------------------------------------
+     +1024px = 64em: Laptops - large devices
+     ------------------------------------------------------------------------- */
+@media only screen and (min-width: 64em) {
     .sign_header {
+        display: flex;
         flex-direction: row;
-        align-items: baseline;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
     }
     .sign_title {
         display: flex;
@@ -429,18 +444,6 @@ a {
         flex-direction: column;
         justify-content: space-evenly;
     }
-}
-
-/* MEDIA QUERIES -------------------------------------------------------------
-     +768px = 48em: Tablets - medium devices
-     ------------------------------------------------------------------------- */
-@media only screen and (min-width: 48em) {
-}
-
-/* MEDIA QUERIES -------------------------------------------------------------
-     +1024px = 64em: Laptops - large devices
-     ------------------------------------------------------------------------- */
-@media only screen and (min-width: 64em) {
 }
 
 /* MEDIA QUERIES -------------------------------------------------------------
