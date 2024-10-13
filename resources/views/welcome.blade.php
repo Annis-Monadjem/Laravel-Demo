@@ -15,18 +15,11 @@
                     <input type="password" placeholder="Password" name="password" id="password">
                 </div>
 
-                <div>
-                    <input type="radio" name="location" id="home" value="home">
-                    <label for="home">Home</label>
-
-                    <input type="radio" name="location" id="work" value="work">
-                    <label for="work">Work</label>
-                </div>
-
                 <button type="submit">Log In</button>
             </form>
             <p><a href="#" class="btn-plain">Forgot Password?</a></p>
-            <a href="/register" class="btn btn-action">Create new account</a>
+
+            <a href="/register"><button>Create new account</button></a>
         </div>
     </div>
 </x-authLayout>
