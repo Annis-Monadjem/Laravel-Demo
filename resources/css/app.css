@@ -1,14 +1,9 @@
-/*
-  Breakpoints:
-    Mobile (640px = 40em)
-    Tablet (768px = 48em)
-    Tablet Landscape (1024px = 64em)
-    Laptop (1440px = 90em)
-    Really large screens ( >= 2000px = 125 em)
-*/
-
-/* Mobile First:
-Mobile (640px = 40em) */
+:root {
+    box-sizing: border-box;
+    --normal-width: 0.01rem;
+    --elevated-width: 0.05rem;
+    --larger-width: 0.1rem;
+}
 *,
 *::before,
 *::after {
@@ -16,19 +11,287 @@ Mobile (640px = 40em) */
     margin: 0;
     padding: 0;
 }
-html {
-    box-sizing: border-box;
-    font-size: 62.5%; /* 1rem = 10px */
-    display: grid;
-    place-content: center;
-    height: 100vh;
-}
 body {
-    font-size: 1.4rem;
-    font-family: Aria, Helvetica, sans-serif;
+    font-size: 62.5%; /* 1rem = 10px */
+    font-family: system-ui, sans-serif;
+    margin: 0 auto;
+    padding: 4rem 0;
+    width: 90%;
+    max-width: 60rem;
+}
+/* ============================================================================
+
+     STYLING CSS FORMS
+
+   ============================================================================ */
+button,
+fieldset,
+input,
+legend,
+textarea {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+input,
+select,
+textarea {
+    border: var(--normal-width) solid #333;
+    background-color: white;
+    border-radius: 0.25rem;
+}
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea,
+a {
+    font: 1.25rem / 1.5 sans-serif;
+    padding: 0.5rem 0.75rem;
+}
+input:focus,
+input:hover,
+select:focus,
+select:hover,
+textarea:focus,
+textarea:hover {
+    outline: none;
+}
+input:focus,
+select:focus,
+textarea:focus {
+    box-shadow: 0 0 0 var(--elevated-width) black;
+}
+input:hover,
+select:hover,
+textarea:hover {
+    box-shadow: 0 0 0 var(--larger-width) black;
+}
+textarea {
+    min-height: 10rem;
+}
+input::placeholder,
+textarea::placeholder {
+    opacity: 1; /* Firefox */
+    color: #999;
+}
+
+.custom-select {
+    position: relative;
+    width: 200px;
+    & label {
+        display: block;
+        width: 100%;
+        padding: 2px;
+        cursor: default;
+        text-align: left;
+    }
+    & select {
+        width: 100%;
+        padding: 10px;
+        appearance: none;
+        border: var(--normal-width) solid #333;
+        border-radius: 4px;
+        cursor: pointer;
+        padding-right: 40px;
+    }
+    /* Custom arrow for single-select (not multiple) */
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 10px;
+        width: 15px;
+        height: 15px;
+        background-color: black;
+        clip-path: polygon(0% 50%, 25% 75%, 100% 0%, 95% 0%, 25% 70%, 0% 45%);
+        transform: translateY(50%);
+        pointer-events: none;
+    }
+    /* Hover effect for the arrow */
+    &:hover::after {
+        clip-path: polygon(0% 50%, 25% 75%, 100% 0%, 90% 0%, 25% 65%, 0% 40%);
+    }
+
+    /* Remove the arrow for multiple select */
+    & select[multiple] {
+        padding-right: 10px;
+    }
+
+    & select[multiple] + ::after {
+        display: none;
+    }
+    /* Hide the arrow when select is multiple */
+    & select[multiple] {
+        position: relative;
+        z-index: 1;
+    }
+    & select[multiple] ~ ::after {
+        display: none !important;
+    }
+    /* <Select> Shape -------------------------------------------------------
+    <div class="custom-select" id="fruits">
+        <label for="fruits">Types of Fruits</label>
+        <select name="fruit" id="select" multiple>
+            <option value="pear">Pear</option>
+            <option value="apple">Apple</option>
+            <option value="lemon">Lemon</option>
+        </select>
+    </div>
+    ------------------------------------------------------------------------- */
+}
+input[type="radio"] {
+    display: inline-block;
+    height: 1.5em;
+    width: 1.5em;
+    vertical-align: middle;
+    border-radius: 50%;
+    &:checked {
+        background: radial-gradient(#333 40%, transparent calc(40% + 1px));
+    }
+    &:hover {
+        box-shadow: 0 0 0 var(--larger-width) black;
+    }
+}
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: var(--normal-width) solid #333;
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
+    display: inline-grid;
+    place-content: center;
+    margin-left: 12px;
+    margin-right: 5px;
+    &[type="checkbox"]::before {
+        content: "";
+        width: 0.65em;
+        height: 0.65em;
+        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+        transform-origin: bottom left;
+        transition: 120ms transform ease-in-out;
+        background-color: currentColor;
+        transform: scale(0);
+    }
+    &[type="checkbox"]:checked::before {
+        transform: scale(1);
+    }
+    &[type="checkbox"]:focus::before {
+        box-shadow: 0 0 0 var(--elevated-width) black;
+    }
+    &[type="checkbox"]:hover::before {
+        box-shadow: 0 0 0 var(--larger-width) black;
+    }
+    &[type="checkbox"]:disabled::before {
+        color: #999;
+        cursor: not-allowed;
+    }
+}
+button {
+    font: 1.25rem sans-serif;
+    background-color: black;
+    color: white;
+    border-radius: 0.25rem;
+    padding: 0.75rem 1.25rem;
+    outline: none;
+    cursor: pointer;
+    &:focus {
+        background-color: white;
+        color: black;
+        box-shadow:
+            0 0 0 1px black,
+            0 0 0 2px white,
+            0 0 0 4px black;
+    }
+    &:hover {
+        box-shadow:
+            0 0 0 1px black,
+            0 0 0 2px white,
+            0 0 0 5px black;
+        color: white;
+        background-color: black;
+    }
+}
+label,
+legend {
+    -webkit-user-select: none;
+    user-select: none;
+    display: inline-block;
+    &.large-label {
+        font: bold 1.5rem sans-serif;
+        margin-bottom: 0.5rem;
+    }
+    &.small-label {
+        vertical-align: middle;
+        margin-left: 0.25rem;
+        margin-right: 1.5rem;
+        font: 1.25rem sans-serif;
+    }
+}
+label,
+input,
+textarea {
+    cursor: pointer;
+}
+a {
+    display: inline-block;
+    text-decoration: none;
+    border: none;
+    outline: none;
+    box-shadow: none;
+    cursor: pointer;
+    &:focus {
+        color: black;
+        text-decoration: underline;
+        text-decoration-thickness: var(--normal-width);
+    }
+    &:link {
+        color: black;
+    }
+    &:visited {
+        color: black;
+    }
+    &:hover {
+        color: black;
+        text-decoration: underline;
+        text-decoration-thickness: var(--larger-width);
+    }
+    &:active {
+        color: black;
+        text-decoration: underline;
+        text-decoration-thickness: var(--normal-width);
+    }
+}
+/* ===========================================================================
+
+     BREAKPOINTS
+
+      < 640px = 40em: Small Phones (Mobile - Default)
+       +640px = 40em: Large Phones
+       +768px = 48em: Tablets - medium devices
+      +1024px = 64em: Laptops - large devices
+      +1280px = 80em: Desktops - largest devices
+
+     ========================================================================= */
+
+/* MEDIA QUERIES (MOBILE FIRST - DEFAULT) ------------------------------------
+     < 640px = 40em: Small Phones (Mobile)
+     ------------------------------------------------------------------------- */
+/* MOST OF YOUR CODE WILL BE LOCATED HERE BELOW THIS LINE */
+.container {
+    font-size: 1rem;
+    display: grid;
+    place-items: center;
 }
 .sign_header {
-    height: 80vh;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -39,7 +302,7 @@ body {
     & h1 {
         margin: 0 0 10px 0;
         justify-self: flex-start;
-        color: hsl(214, 89%, 52%);
+        color: black;
         font-size: 6rem;
     }
     & h3 {
@@ -56,82 +319,98 @@ body {
         margin: 2px auto;
     }
 }
-
-/* Common Elements */
-a {
-    text-decoration: none;
-    display: block;
-    width: 200px;
-    height: 35px;
-    line-height: 35px;
-    border-radius: 2px;
-    &:hover,
-    &:active,
-    &:focus {
-        text-decoration: underline;
-        outline: 1px solid #1877f2;
-        outline-offset: 2px;
+/*
+.register_header {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: space-around;
+}
+.register_title {
+    justify-content: center;
+    & h1 {
+        justify-self: flex-start;
+        color: black;
+        font-size: 6rem;
     }
-    color: white;
-    background-color: #0866ff;
-    &.btn {
-        &:hover,
-        &:active,
-        &:focus {
-            text-decoration: none;
+    & h3 {
+        font-size: 2rem;
+        font-weight: 300;
+        margin: 0 auto;
+    }
+    & p {
+        color: grey;
+    }
+}
+.register_body {
+    & form {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 10px;
+        & fieldset {
+            border: none;
+            & legend {
+                margin: 1rem 0 0 -1rem;
+                opacity: 0.5;
+                & div {
+                    grid-template-columns: repeat(3, 1fr);
+                    width: 100px;
+                    & * {
+                        display: inline;
+                        margin: 50px;
+                        width: 50px;
+                    }
+                }
+            }
+            & .firstname {
+                grid-column: 1 / 4;
+                grid-row: 1 / 2;
+                border: 1px solid red;
+                padding: 5px;
+            }
+            & .lastname {
+                grid-column: 4 / 7;
+                grid-row: 1 / 2;
+                padding: 5px;
+                background-color: blue;
+            }
+        }
+        & fieldset {
+            display: grid;
+            padding: 20px;
+            grid-template-columns: repeat(4, 50px);
+            grid-template-rows: repeat(3, 35px);
+            & .female-label {
+                grid-column: 1 / 2;
+                grid-row: 2 / 3;
+                display: flex;
+                align-items: center;
+                padding: 0 5px;
+            }
+            & .female-checkbox {
+                display: block;
+                grid-column: 2 / 3;
+                grid-row: 2 / 3;
+            }
+            & .male-label {
+                grid-column: 4 / 5;
+                grid-row: 2 / 3;
+                display: flex;
+                align-items: center;
+                padding: 0 5px;
+            }
+            & .male-checkbox {
+                grid-column: 5 / 6;
+                grid-row: 2 / 3;
+            }
         }
     }
-    &.btn-action {
-        background-color: #42b72a !important;
-        &:hover,
-        &:active,
-        &:focus {
-            background-color: #36a420;
-            outline: 1px solid #36a420;
-            outline-offset: 2px;
-        }
-    }
-    &.btn-plain {
-        background-color: white;
-        color: #0866ff;
-    }
 }
-button {
-    padding: 5px 9px;
-    width: 200px;
-    height: 35px;
-    border: none;
-    border-radius: 2px;
-    outline: 0px solid transparent;
-    color: white;
-    font-weight: 500;
-    background-color: #0866ff;
-    &:hover,
-    &:active,
-    &:focus {
-        background-color: #1877f2;
-        outline: 1px solid #1877f2;
-        outline-offset: 2px;
-    }
-}
-input {
-    padding: 5px 9px;
-    width: 200px;
-    height: 35px;
-    border-radius: 2px;
-    outline: 0px solid transparent;
-    border: none;
-    &:hover,
-    &:active,
-    &:focus {
-        outline: 1px solid #1877f2;
-        outline: 1px solid #1877f2;
-        outline-offset: 2px;
-    }
-}
-
-/* Tablet (768px = 48em) and Larger */
-@media only screen and (min-width: 48em) {
+*/
+/* MEDIA QUERIES -------------------------------------------------------------
+     +640px = 40em: Large Phones
+     ------------------------------------------------------------------------- */
+@media only screen and (min-width: 40em) {
     .sign_header {
         flex-direction: row;
         align-items: baseline;
@@ -151,12 +430,49 @@ input {
         justify-content: space-evenly;
     }
 }
-/* Tablet Landscape (1024px = 64em) and Larger */
+
+/* MEDIA QUERIES -------------------------------------------------------------
+     +768px = 48em: Tablets - medium devices
+     ------------------------------------------------------------------------- */
+@media only screen and (min-width: 48em) {
+}
+
+/* MEDIA QUERIES -------------------------------------------------------------
+     +1024px = 64em: Laptops - large devices
+     ------------------------------------------------------------------------- */
 @media only screen and (min-width: 64em) {
 }
-/* Laptop (1440px = 90em) and Larger */
-@media only screen and (min-width: 90em) {
+
+/* MEDIA QUERIES -------------------------------------------------------------
+     +1280px = 80em: Desktops - largest devices
+     ------------------------------------------------------------------------- */
+@media only screen and (min-width: 80em) {
 }
-/* Really large screens ( >= 2000px = 125 em) */
-@media only screen and (min-width: 125em) {
-}
+
+/* ===========================================================================
+
+     HTML SHAPE
+
+   =========================================================================== */
+/*
+  <!DOCTYPE html>
+  <html lang="en-US">
+      <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta http-equiv="X-UA-Compatible" content="ie=edge">
+          <link rel="shortcut icon" sizes="16x16" type="image/x-icon" href="{{ asset('favicon16x16.png') }}">
+          @vite(['resources/css/app.css', 'resources/js/app.js'])
+          <title>Document</title>
+      </head>
+      <body>
+          <div class="container">
+              <header></header>
+              <main>
+                  {{ $slot }}
+              </main>
+              <footer></footer>
+          </div>
+      </body>
+  </html>
+*/
