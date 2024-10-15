@@ -1,25 +1,21 @@
 <x-authLayout>
-    <div class="sign_header">
-        <div class="sign_title">
+    <div class="sign-header">
+        <div class="sign-header_title">
             <h1>fakeface</h1>
             <h3>Connect with friends and the world around you on Fakeface.</h3>
         </div>
-        <div class="sign_body">
+        <div class="sign-header_body">
             <form action="#" method="POST">
-                <div>
-                    <label for="email" />
-                    <input type="text" placeholder="Email or phone number" name="email" id="email">
-                </div>
-                <div>
-                    <label for="password" />
-                    <input type="password" placeholder="Password" name="password" id="password">
-                </div>
+                <label for="email"></label>
+                <input type="text" placeholder="Email or phone number" name="email" id="email">
+
+                <label for="password"></label>
+                <input type="password" placeholder="Password" name="password" id="password">
 
                 <button type="submit">Log In</button>
             </form>
-            <p><a href="#" class="btn-plain">Forgot Password?</a></p>
-
-            <a href="/register"><button>Create new account</button></a>
+            <a href="#">Forgot Password?</a>
+            <a href="/register" class="btn">Create new account</a>
         </div>
     </div>
 </x-authLayout>

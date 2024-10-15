@@ -1,8 +1,18 @@
 :root {
     box-sizing: border-box;
+
     --normal-width: 0.01rem;
     --elevated-width: 0.05rem;
     --larger-width: 0.1rem;
+}
+html,
+body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    place-items: center;
+    overflow-x: hidden;
 }
 *,
 *::before,
@@ -14,16 +24,21 @@
 body {
     font-size: 62.5%; /* 1rem = 10px */
     font-family: system-ui, sans-serif;
-    margin: 0 auto;
-    padding: 4rem 0;
-    width: 90%;
-    max-width: 60rem;
 }
 /* ============================================================================
 
      STYLING CSS FORMS
 
    ============================================================================ */
+input,
+button,
+a {
+    width: 100%;
+    display: inline-block;
+    padding: 0 12px;
+    height: auto;
+}
+
 button,
 fieldset,
 input,
@@ -36,6 +51,9 @@ textarea {
     border: none;
     padding: 0;
     margin: 0;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
 }
 input,
 select,
@@ -73,6 +91,7 @@ textarea:hover {
 }
 textarea {
     min-height: 10rem;
+    height: 100%;
 }
 input::placeholder,
 textarea::placeholder {
@@ -82,7 +101,7 @@ textarea::placeholder {
 
 .custom-select {
     position: relative;
-    width: 200px;
+    width: 100%;
     & label {
         display: block;
         width: 100%;
@@ -147,6 +166,7 @@ textarea::placeholder {
 input[type="radio"] {
     display: inline-block;
     height: 1.5em;
+    height: 100%;
     width: 1.5em;
     vertical-align: middle;
     border-radius: 50%;
@@ -201,8 +221,6 @@ button {
     color: white;
     border-radius: 0.25rem;
     padding: 0.75rem 1.25rem;
-    outline: none;
-    cursor: pointer;
     &:focus {
         background-color: white;
         color: black;
@@ -238,7 +256,8 @@ legend {
 }
 label,
 input,
-textarea {
+textarea,
+button {
     cursor: pointer;
 }
 a {
@@ -269,6 +288,34 @@ a {
         text-decoration: underline;
         text-decoration-thickness: var(--normal-width);
     }
+    &[class="btn"] {
+        text-decoration: none;
+        margin: 0;
+        font: 1.25rem sans-serif;
+        background-color: black;
+        color: white;
+        outline: none;
+        border: none;
+        border-radius: 0.25rem;
+        padding: 0.75rem 1.25rem;
+        cursor: pointer;
+        &:focus {
+            background-color: white;
+            color: black;
+            box-shadow:
+                0 0 0 1px black,
+                0 0 0 2px white,
+                0 0 0 4px black;
+        }
+        &:hover {
+            box-shadow:
+                0 0 0 1px black,
+                0 0 0 2px white,
+                0 0 0 5px black;
+            color: white;
+            background-color: black;
+        }
+    }
 }
 /* ===========================================================================
 
@@ -287,126 +334,66 @@ a {
      ------------------------------------------------------------------------- */
 /* MOST OF YOUR CODE WILL BE LOCATED HERE BELOW THIS LINE */
 .container {
-    font-size: 1rem;
+    height: 100%;
     display: grid;
     place-items: center;
+    font-size: 1em;
+    max-width: 100%;
+    gap: 0px;
+    overflow-x: hidden;
+    & > main,
+    & > header,
+    & > footer {
+        height: 100%;
+        display: grid;
+        place-items: center;
+        max-width: 100%;
+        gap: 0px;
+        overflow-x: hidden;
+    }
 }
-.sign_header {
+.sign-header {
+    height: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     text-align: center;
-    justify-content: space-around;
-}
-.sign_title {
     justify-content: center;
+    gap: 0px;
+    overflow-x: hidden;
+}
+.sign-header_title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: auto;
     & h1 {
         margin: 0 0 10px 0;
-        justify-self: flex-start;
         color: black;
-        font-size: 6rem;
+        font-size: 6em;
     }
     & h3 {
-        font-size: 2rem;
+        font-size: 20px;
         font-weight: 300;
         max-width: 80%;
         margin: 0 auto;
     }
 }
-.sign_body {
+.sign-header_body {
     display: flex;
     flex-direction: column;
-    & * {
-        margin: 2px auto;
-    }
-}
-/*
-.register_header {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: space-around;
-}
-.register_title {
-    justify-content: center;
-    & h1 {
-        justify-self: flex-start;
-        color: black;
-        font-size: 6rem;
-    }
-    & h3 {
-        font-size: 2rem;
-        font-weight: 300;
-        margin: 0 auto;
-    }
-    & p {
-        color: grey;
-    }
-}
-.register_body {
+    width: 40vw;
+    margin: 4px;
     & form {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        column-gap: 10px;
-        & fieldset {
-            border: none;
-            & legend {
-                margin: 1rem 0 0 -1rem;
-                opacity: 0.5;
-                & div {
-                    grid-template-columns: repeat(3, 1fr);
-                    width: 100px;
-                    & * {
-                        display: inline;
-                        margin: 50px;
-                        width: 50px;
-                    }
-                }
-            }
-            & .firstname {
-                grid-column: 1 / 4;
-                grid-row: 1 / 2;
-                border: 1px solid red;
-                padding: 5px;
-            }
-            & .lastname {
-                grid-column: 4 / 7;
-                grid-row: 1 / 2;
-                padding: 5px;
-                background-color: blue;
-            }
-        }
-        & fieldset {
-            display: grid;
-            padding: 20px;
-            grid-template-columns: repeat(4, 50px);
-            grid-template-rows: repeat(3, 35px);
-            & .female-label {
-                grid-column: 1 / 2;
-                grid-row: 2 / 3;
-                display: flex;
-                align-items: center;
-                padding: 0 5px;
-            }
-            & .female-checkbox {
-                display: block;
-                grid-column: 2 / 3;
-                grid-row: 2 / 3;
-            }
-            & .male-label {
-                grid-column: 4 / 5;
-                grid-row: 2 / 3;
-                display: flex;
-                align-items: center;
-                padding: 0 5px;
-            }
-            & .male-checkbox {
-                grid-column: 5 / 6;
-                grid-row: 2 / 3;
-            }
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        & > * {
+            margin-bottom: 3px;
         }
     }
 }
-*/
+
 /* MEDIA QUERIES -------------------------------------------------------------
      +640px = 40em: Large Phones
      ------------------------------------------------------------------------- */
@@ -423,26 +410,28 @@ a {
      +1024px = 64em: Laptops - large devices
      ------------------------------------------------------------------------- */
 @media only screen and (min-width: 64em) {
-    .sign_header {
+    .sign-header {
         display: flex;
         flex-direction: row;
-        align-items: center;
         justify-content: center;
-        height: 100vh;
+        align-items: center;
     }
-    .sign_title {
+    .sign-header_title {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        justify-content: center;
+        text-align: left;
+        margin: 0;
         & h3 {
             margin: 0;
-            text-align: left;
         }
     }
-    .sign_body {
+    .sign-header_body {
         display: flex;
         flex-direction: column;
+        align-items: center;
         justify-content: space-evenly;
+        width: 30vw;
     }
 }
 
