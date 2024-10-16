@@ -1,9 +1,17 @@
 :root {
     box-sizing: border-box;
 
-    --normal-width: 0.01rem;
-    --elevated-width: 0.05rem;
+    --width: 0.01rem;
+    --large-width: 0.05rem;
     --larger-width: 0.1rem;
+
+    --very-light_grey-color: #eee;
+    --lighter_grey-color: #ccc;
+    --light_grey-color: #aaa;
+    --grey-color: #888;
+    --dark_grey-color: #555;
+    --darker_grey-color: #333;
+    --very-dark_grey-color: #222;
 }
 html,
 body {
@@ -25,25 +33,226 @@ body {
     font-size: 62.5%; /* 1rem = 10px */
     font-family: system-ui, sans-serif;
 }
-/* ============================================================================
+/* STYLING CUSTOM RADIO AND CHECKBOX ======================================
+   <label class="form-control">
+     <input type="radio" name="radio">Radio
+   </label>
+   <label class="form-control">
+     <input type="checkbox" name="checkbox">Checkbox
+   </label>
+   ======================================================================== */
+.form-control {
+    font-family: system-ui, sans-serif;
+    font-size: 2rem;
+    font-weight: bold;
+    line-height: 1.1;
+    display: grid;
+    grid-template-columns: 1em auto;
+    gap: 0.5em;
+}
+.form-control--disabled {
+    color: var(--dark_grey-color);
+    cursor: not-allowed;
+}
+.form-control input[type="radio"],
+.form-control input[type="radio"]::before {
+    border-radius: 50%;
+}
+.form-control input[type="radio"],
+.form-control input[type="checkbox"] {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
 
-     STYLING CSS FORMS
+    font: inherit;
+    color: currentColor;
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid currentColor;
+    transform: translateY(-0.075em);
 
-   ============================================================================ */
-input,
-button,
-a {
-    width: 100%;
-    display: inline-block;
-    padding: 0 12px;
-    height: auto;
+    display: grid;
+    place-content: center;
+}
+.form-control input[type="radio"]::before,
+.form-control input[type="checkbox"]::before {
+    content: "";
+    width: 0.65em;
+    height: 0.65em;
+    transform: scale(0);
+    transition: 120ms transform ease-in-out;
+    box-shadow: inset 1em 1em var(--darker_grey-color);
+    background-color: CanvasText;
+}
+.form-control input[type="radio"]:checked::before,
+.form-control input[type="checkbox"]:checked::before {
+    transform: scale(1);
+}
+.form-control input[type="radio"]:focus,
+.form-control input[type="checkbox"]:focus {
+    outline: 1px solid currentColor;
+}
+.form-control input[type="checkbox"]:disabled {
+    color: var(--dark_grey-color);
+    cursor: not-allowed;
+}
+.form-control input[type="checkbox"]::before {
+    transform-origin: bottom left;
+    clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+}
+.form-control .form-control {
+    margin-top: 1em;
 }
 
-button,
-fieldset,
-input,
-legend,
-textarea {
+/* STYLING CUSTOM SELECT ==================================================
+   <label for="standard-select">Standard Select</label>
+   <div class="select select--multiple">
+     <select id="standard-select" multiple>
+       <option value="Option 1">Option 1</option>
+       <option value="Option 2">Option 2</option>
+     </select>
+     <span class="focus"></span>
+   </div>
+   ========================================================================= */
+select {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    padding: 0 1em 0 0;
+    margin: 0;
+    width: 100%;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+    line-height: inherit;
+    z-index: 1; /* Stack above custom arrow */
+    outline: none;
+}
+select:focus + .focus {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    border: 2px solid var(--darker_grey-color);
+    border-radius: inherit;
+}
+select[multiple] {
+    padding-right: 0;
+    height: 6rem;
+}
+select option {
+    white-space: normal;
+    outline-color: var(--darker_grey-color);
+}
+.select {
+    display: grid;
+    grid-template-areas: "select";
+    align-items: center;
+    justify-items: end;
+    position: relative;
+
+    min-width: 15ch;
+    max-width: 20ch;
+
+    border: 1px solid var(--grey-color);
+    border-radius: 0.25em;
+    padding: 0.25em 0.5em;
+    font-size: 1.25rem;
+    cursor: pointer;
+    line-height: 1.1;
+
+    background-color: var(--very-light_grey-color);
+    background-image: linear-gradient(to top, var(--light_grey-color), var(--very-light_grey-color) 33%);
+}
+select,
+.select:after {
+    grid-area: select;
+}
+.select:not(.select--multiple)::after {
+    content: "";
+    justify-self: end;
+    width: 0.8em;
+    height: 0.5em;
+    background-color: var(--dark_grey-color);
+    clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+}
+.select--disabled {
+    cursor: not-allowed;
+    background-color: var(--very-light_grey-color);
+    background-image: linear-gradient(to top, var(--lighter_grey-color), var(--very-light_grey-color) 33%);
+}
+.select + label {
+    margin-top: 2rem;
+}
+
+/* STYLING CUSTOM INPUTS AND TEXTAREA =====================================
+   <label for="text-input">Text Input</label>
+   <input class="input" id="text-input" type="text" />
+
+   <label for="textarea">Textarea</label>
+   <textarea class="input" id="textarea"></textarea>
+   ======================================================================== */
+.input {
+    --input-border: var(--light_grey-color);
+    font-size: 16px;
+    font-size: max(16px, 1em);
+    font-family: inherit;
+    padding: 0.25em 0.5em;
+    background-color: #fff;
+    border: 2px solid var(--input-border);
+    border-radius: 4px;
+    transition: 180ms box-shadow ease-in-out;
+}
+.input:not(textarea) {
+    line-height: 1;
+    height: 2.25rem;
+}
+.input[readonly] {
+    border-style: dotted;
+    cursor: not-allowed;
+    color: var(--light_grey-color);
+}
+.input[disabled] {
+    --input-border: var(--very-light_grey-color);
+
+    background-color: var(--grey-color);
+    cursor: not-allowed;
+}
+.input:focus {
+    border-color: var(--very-dark_grey-color);
+    box-shadow: 0 0 0 3px hsla(245, 100%, calc(42% + 40%), 0.8);
+    outline: 3px solid transparent;
+}
+input[type="file"] {
+    font-size: 0.9em;
+    padding-top: 0.35rem;
+}
+textarea.input {
+    resize: vertical;
+}
+
+/* STYLING LABELS AND LEGENDS =============================================
+   ======================================================================== */
+label,
+legend {
+    -webkit-user-select: none;
+    user-select: none;
+    display: inline-block;
+    margin-left: 4px;
+    vertical-align: middle;
+    padding: 2px;
+    text-align: left;
+    font: 1rem sans-serif;
+}
+label.large-label {
+    font: bold 1.5rem sans-serif;
+    margin-bottom: 0.5rem;
+}
+
+label,
+legend {
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
@@ -55,284 +264,150 @@ textarea {
     font-family: inherit;
     font-size: inherit;
 }
-input,
-select,
-textarea {
-    border: var(--normal-width) solid #333;
-    background-color: white;
-    border-radius: 0.25rem;
-}
-input[type="text"],
-input[type="email"],
-input[type="password"],
-select,
-textarea,
-a {
-    font: 1.25rem / 1.5 sans-serif;
-    padding: 0.5rem 0.75rem;
-}
-input:focus,
-input:hover,
-select:focus,
-select:hover,
-textarea:focus,
-textarea:hover {
-    outline: none;
-}
-input:focus,
-select:focus,
-textarea:focus {
-    box-shadow: 0 0 0 var(--elevated-width) black;
-}
-input:hover,
-select:hover,
-textarea:hover {
-    box-shadow: 0 0 0 var(--larger-width) black;
-}
-textarea {
-    min-height: 10rem;
-    height: 100%;
-}
-input::placeholder,
-textarea::placeholder {
-    opacity: 1; /* Firefox */
-    color: #999;
-}
-
-.custom-select {
-    position: relative;
-    width: 100%;
-    & label {
-        display: block;
-        width: 100%;
-        padding: 2px;
-        cursor: default;
-        text-align: left;
-    }
-    & select {
-        width: 100%;
-        padding: 10px;
-        appearance: none;
-        border: var(--normal-width) solid #333;
-        border-radius: 4px;
-        cursor: pointer;
-        padding-right: 40px;
-    }
-    /* Custom arrow for single-select (not multiple) */
-    &::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        right: 10px;
-        width: 15px;
-        height: 15px;
-        background-color: black;
-        clip-path: polygon(0% 50%, 25% 75%, 100% 0%, 95% 0%, 25% 70%, 0% 45%);
-        transform: translateY(50%);
-        pointer-events: none;
-    }
-    /* Hover effect for the arrow */
-    &:hover::after {
-        clip-path: polygon(0% 50%, 25% 75%, 100% 0%, 90% 0%, 25% 65%, 0% 40%);
-    }
-
-    /* Remove the arrow for multiple select */
-    & select[multiple] {
-        padding-right: 10px;
-    }
-
-    & select[multiple] + ::after {
-        display: none;
-    }
-    /* Hide the arrow when select is multiple */
-    & select[multiple] {
-        position: relative;
-        z-index: 1;
-    }
-    & select[multiple] ~ ::after {
-        display: none !important;
-    }
-    /* <Select> Shape -------------------------------------------------------
-    <div class="custom-select" id="fruits">
-        <label for="fruits">Types of Fruits</label>
-        <select name="fruit" id="select" multiple>
-            <option value="pear">Pear</option>
-            <option value="apple">Apple</option>
-            <option value="lemon">Lemon</option>
-        </select>
-    </div>
-    ------------------------------------------------------------------------- */
-}
-input[type="radio"] {
-    display: inline-block;
-    height: 1.5em;
-    height: 100%;
-    width: 1.5em;
-    vertical-align: middle;
-    border-radius: 50%;
-    &:checked {
-        background: radial-gradient(#333 40%, transparent calc(40% + 1px));
-    }
-    &:hover {
-        box-shadow: 0 0 0 var(--larger-width) black;
-    }
-}
-input[type="checkbox"] {
-    -webkit-appearance: none;
-    appearance: none;
-    font: inherit;
-    color: currentColor;
-    width: 1.15em;
-    height: 1.15em;
-    border: var(--normal-width) solid #333;
-    border-radius: 0.15em;
-    transform: translateY(-0.075em);
-    display: inline-grid;
-    place-content: center;
-    margin-left: 12px;
-    margin-right: 5px;
-    &[type="checkbox"]::before {
-        content: "";
-        width: 0.65em;
-        height: 0.65em;
-        clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-        transform-origin: bottom left;
-        transition: 120ms transform ease-in-out;
-        background-color: currentColor;
-        transform: scale(0);
-    }
-    &[type="checkbox"]:checked::before {
-        transform: scale(1);
-    }
-    &[type="checkbox"]:focus::before {
-        box-shadow: 0 0 0 var(--elevated-width) black;
-    }
-    &[type="checkbox"]:hover::before {
-        box-shadow: 0 0 0 var(--larger-width) black;
-    }
-    &[type="checkbox"]:disabled::before {
-        color: #999;
-        cursor: not-allowed;
-    }
-}
-button {
-    font: 1.25rem sans-serif;
-    background-color: black;
-    color: white;
-    border-radius: 0.25rem;
-    padding: 0.75rem 1.25rem;
-    &:focus {
-        background-color: white;
-        color: black;
-        box-shadow:
-            0 0 0 1px black,
-            0 0 0 2px white,
-            0 0 0 4px black;
-    }
-    &:hover {
-        box-shadow:
-            0 0 0 1px black,
-            0 0 0 2px white,
-            0 0 0 5px black;
-        color: white;
-        background-color: black;
-    }
-}
 label,
 legend {
-    -webkit-user-select: none;
-    user-select: none;
-    display: inline-block;
-    &.large-label {
-        font: bold 1.5rem sans-serif;
-        margin-bottom: 0.5rem;
-    }
-    &.small-label {
-        vertical-align: middle;
-        margin-left: 0.25rem;
-        margin-right: 1.5rem;
-        font: 1.25rem sans-serif;
-    }
-}
-label,
-input,
-textarea,
-button {
     cursor: pointer;
-}
-a {
     display: inline-block;
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+/* STYLING BUTTON AND ANCHOR ELEMENTS =======================================
+   <a href="javascript:;" class="button">Button Link</a>
+   <button type="button" class="button">Real Button</button>
+   COMMENTS: (1) The `javascript:;` is used to test states without triggering
+                 navigation.
+             (2) The `type="button"` explicit type button to prevent
+                 triggering a get request and page reload.
+   ========================================================================== */
+a.button {
     text-decoration: none;
-    border: none;
-    outline: none;
-    box-shadow: none;
-    cursor: pointer;
-    &:focus {
-        color: black;
-        text-decoration: underline;
-        text-decoration-thickness: var(--normal-width);
-    }
-    &:link {
-        color: black;
-    }
-    &:visited {
-        color: black;
-    }
-    &:hover {
-        color: black;
-        text-decoration: underline;
-        text-decoration-thickness: var(--larger-width);
-    }
-    &:active {
-        color: black;
-        text-decoration: underline;
-        text-decoration-thickness: var(--normal-width);
-    }
-    &[class="btn"] {
-        text-decoration: none;
-        margin: 0;
-        font: 1.25rem sans-serif;
-        background-color: black;
-        color: white;
-        outline: none;
-        border: none;
-        border-radius: 0.25rem;
-        padding: 0.75rem 1.25rem;
-        cursor: pointer;
-        &:focus {
-            background-color: white;
-            color: black;
-            box-shadow:
-                0 0 0 1px black,
-                0 0 0 2px white,
-                0 0 0 4px black;
-        }
-        &:hover {
-            box-shadow:
-                0 0 0 1px black,
-                0 0 0 2px white,
-                0 0 0 5px black;
-            color: white;
-            background-color: black;
-        }
-    }
 }
-/* ===========================================================================
+button.button {
+    border: none;
+    background-color: transparent;
+    font-family: inherit;
+    padding: 0;
+    cursor: pointer;
+}
+a.button,
+button.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: start;
 
-     BREAKPOINTS
+    background-color: #fff;
+    color: black;
+    border: 1px solid var(--grey-color);
+    border-radius: 8px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+    padding: 0.25em 0.75em;
+    min-width: 10ch;
+    min-height: 36px;
+    text-align: center;
+    line-height: 1.1;
 
-      < 640px = 40em: Small Phones (Mobile - Default)
-       +640px = 40em: Large Phones
-       +768px = 48em: Tablets - medium devices
-      +1024px = 64em: Laptops - large devices
-      +1280px = 80em: Desktops - largest devices
+    transition: 220ms all ease-in-out;
+}
+a.button:hover,
+a.button:active,
+button.button:hover,
+button.button:active {
+    background-color: black;
+    color: white;
+}
+a.button:focus,
+button.button:focus {
+    outline-style: solid;
+    outline-color: transparent;
+    box-shadow: 0 0 0 4px var(--dark_grey-color);
+}
+a.button--small,
+button.button--small {
+    font-size: 1.15rem;
+}
+a.button--block,
+button.button--block {
+    width: 100%;
+}
 
-     ========================================================================= */
+/* MAKING STYLING CONSISTENT =====================================
+   CSS Styling for Consistent <a>, <button>, and <input> Elements
+   =========================================================================== */
+label:empty {
+    height: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+input,
+button {
+    text-align: left;
+    text-decoration: none;
+    line-height: 1.5;
+    color: inherit;
+    width: 200px;
+    height: 36px;
+    display: inline-block;
+    padding: 10px 20px;
+    border: 2px solid #000;
+    border-radius: 5px;
+    background-color: #f0f0f0;
+    cursor: pointer;
+}
 
-/* MEDIA QUERIES (MOBILE FIRST - DEFAULT) ------------------------------------
+a:hover,
+button:hover,
+input:hover,
+a:focus,
+button:focus,
+input:focus {
+    background-color: #e0e0e0;
+    outline: none;
+    border-color: var(--dark_grey-color);
+}
+
+a {
+    display: inline-block; /* Ensure <a> behaves like a button */
+    padding: 10px 20px;
+    align-self: start;
+}
+
+button,
+input[type="submit"] {
+    appearance: none; /* Remove default button styles */
+    border: none; /* Remove default borders */
+    padding: 0;
+    margin: 0;
+}
+input[type="radio"] {
+    width: 20px;
+    text-align: center;
+}
+fieldset {
+    border: 2px dotted var(--grey-color);
+    height: 100px;
+    text-align: left;
+    padding-left: 10px;
+    grid-column: 1/2;
+}
+fieldset div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding: 2px;
+}
+fieldset label {
+    height: 30px;
+    line-height: 30px;
+}
+form button {
+    grid-column: 1/-1;
+    display: inline-block;
+}
+
+/* MEDIA QUERY BREAKPOINT (MOBILE FIRST) =====================================
      < 640px = 40em: Small Phones (Mobile)
-     ------------------------------------------------------------------------- */
-/* MOST OF YOUR CODE WILL BE LOCATED HERE BELOW THIS LINE */
+   =========================================================================== */
 .container {
     height: 100%;
     display: grid;
@@ -341,74 +416,119 @@ a {
     max-width: 100%;
     gap: 0px;
     overflow-x: hidden;
-    & > main,
-    & > header,
-    & > footer {
-        height: 100%;
-        display: grid;
-        place-items: center;
-        max-width: 100%;
-        gap: 0px;
-        overflow-x: hidden;
-    }
+}
+.container > main,
+.container > header,
+.container > footer {
+    height: 100%;
+    display: grid;
+    place-items: center;
+    max-width: 100%;
+    gap: 0px;
+    overflow-x: hidden;
 }
 .sign-header {
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+    text-align: left;
     justify-content: center;
     gap: 0px;
-    overflow-x: hidden;
 }
 .sign-header_title {
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin-bottom: auto;
-    & h1 {
-        margin: 0 0 10px 0;
-        color: black;
-        font-size: 6em;
-    }
-    & h3 {
-        font-size: 20px;
-        font-weight: 300;
-        max-width: 80%;
-        margin: 0 auto;
-    }
+}
+.sign-header_title h1 {
+    text-align: center;
+    margin: 0 0 10px 0;
+    color: black;
+    font-size: 6em;
+}
+.sign-header_title h3 {
+    font-size: 20px;
+    font-weight: 300;
+    max-width: 80%;
+    margin: 0 auto;
 }
 .sign-header_body {
     display: flex;
     flex-direction: column;
-    width: 40vw;
     margin: 4px;
-    & form {
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        & > * {
-            margin-bottom: 3px;
-        }
-    }
+}
+.sign-header_body form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.sign-header_body form > * {
+    margin-bottom: 0px;
 }
 
-/* MEDIA QUERIES -------------------------------------------------------------
+.register-header {
+    min-height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+.register-header_title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 8px;
+}
+.register-header_title h1 {
+    margin: 0 0 10px 0;
+    color: black;
+    font-size: 6em;
+}
+.register-header_title h3 {
+    font-size: 20px;
+    font-weight: 300;
+    max-width: 80%;
+    margin: 0 auto;
+}
+.register-header_body {
+    display: flex;
+    flex-direction: column;
+    margin: 4px;
+}
+.register-header_body form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+.register-header_body form fieldset,
+.register-header_body form legend.row {
+    grid-column: 1/-1;
+}
+.register-header_body form > * {
+    margin-bottom: 3px;
+}
+.register-header_body form fieldset {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+/* MEDIA QUERY BREAKPOINT ====================================================
      +640px = 40em: Large Phones
-     ------------------------------------------------------------------------- */
+   =========================================================================== */
 @media only screen and (min-width: 40em) {
 }
 
-/* MEDIA QUERIES -------------------------------------------------------------
+/* MEDIA QUERY BREAKPOINT ====================================================
      +768px = 48em: Tablets - medium devices
-     ------------------------------------------------------------------------- */
+   =========================================================================== */
 @media only screen and (min-width: 48em) {
 }
 
-/* MEDIA QUERIES -------------------------------------------------------------
+/* MEDIA QUERY BREAKPOINT ====================================================
      +1024px = 64em: Laptops - large devices
-     ------------------------------------------------------------------------- */
+   =========================================================================== */
 @media only screen and (min-width: 64em) {
     .sign-header {
         display: flex;
@@ -422,9 +542,13 @@ a {
         justify-content: center;
         text-align: left;
         margin: 0;
-        & h3 {
-            margin: 0;
-        }
+    }
+    .sign-header_title h1 {
+        text-align: left;
+    }
+
+    .sign-header_title h3 {
+        margin: 0;
     }
     .sign-header_body {
         display: flex;
@@ -435,36 +559,8 @@ a {
     }
 }
 
-/* MEDIA QUERIES -------------------------------------------------------------
+/* MEDIA QUERY BREAKPOINT ====================================================
      +1280px = 80em: Desktops - largest devices
-     ------------------------------------------------------------------------- */
+   =========================================================================== */
 @media only screen and (min-width: 80em) {
 }
-
-/* ===========================================================================
-
-     HTML SHAPE
-
-   =========================================================================== */
-/*
-  <!DOCTYPE html>
-  <html lang="en-US">
-      <head>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1">
-          <meta http-equiv="X-UA-Compatible" content="ie=edge">
-          <link rel="shortcut icon" sizes="16x16" type="image/x-icon" href="{{ asset('favicon16x16.png') }}">
-          @vite(['resources/css/app.css', 'resources/js/app.js'])
-          <title>Document</title>
-      </head>
-      <body>
-          <div class="container">
-              <header></header>
-              <main>
-                  {{ $slot }}
-              </main>
-              <footer></footer>
-          </div>
-      </body>
-  </html>
-*/
