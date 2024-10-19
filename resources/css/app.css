@@ -346,8 +346,8 @@ button {
     text-decoration: none;
     line-height: 1.5;
     color: inherit;
-    width: 200px;
-    height: 36px;
+    width: 100%;
+    height: auto;
     display: inline-block;
     padding: 10px 20px;
     border: 2px solid #000;
@@ -373,10 +373,9 @@ a {
     align-self: start;
 }
 
-button,
 input[type="submit"] {
-    appearance: none; /* Remove default button styles */
-    border: none; /* Remove default borders */
+    appearance: none;
+    border: none;
     padding: 0;
     margin: 0;
 }
@@ -512,6 +511,13 @@ form button {
 .register-header_body form fieldset {
     display: grid;
     grid-template-columns: 1fr;
+}
+.register-header_body form .emailaddress,
+.register-header_body form .password {
+    grid-column: 1/-1;
+}
+.register-header_body form button {
+    text-align: center;
 }
 
 /* MEDIA QUERY BREAKPOINT ====================================================
