@@ -10,4 +10,8 @@ class UserController extends Controller
     {
         return view("welcome");
     }
+    public function showRegistrationForm()
+    {
+        return view("showRegistrationForm");
+    }
 }
