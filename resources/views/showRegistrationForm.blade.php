@@ -10,7 +10,8 @@
                 <input type="text" placeholder="First name" name="firstname" id="firstname" class="input">
                 <input type="text" placeholder="Last name" name="lastname" id="lastname" class="input">
                 <label for="birthdate" class="row"><small>Birthday</small></label>
-                <input type="date" name="birthdate" id="birthdate" class="input">
+                <input type="date" name="birthdate" id="birthdate" class="input"
+                    value="{{ now()->format('Y-m-d') }}">
                 <fieldset>
                     <legend class="row"><small>Gender</small></legend>
                     <div>
@@ -22,9 +23,9 @@
                         <input type="radio" name="gender" value="male" id="male">
                     </div>
                 </fieldset>
-                <button class="row">Sign up</button>
                 <input type="text" name="emailaddress" placeholder="Email address" class="emailaddress input">
                 <input type="password" name="password" placeholder="New password" class="password input">
+                <button class="row">Sign up</button>
             </form>
         </div>
     </div>
