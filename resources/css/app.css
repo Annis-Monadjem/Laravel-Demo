@@ -126,7 +126,7 @@ select {
     font-size: inherit;
     cursor: inherit;
     line-height: inherit;
-    z-index: 1; /* Stack above custom arrow */
+    z-index: 1;
     outline: none;
 }
 select:focus + .focus {
@@ -366,11 +366,8 @@ input:focus {
     outline: none;
     border-color: var(--dark_grey-color);
 }
-
 a {
-    display: inline-block; /* Ensure <a> behaves like a button */
-    padding: 10px 20px;
-    align-self: start;
+    display: inline-block;
 }
 
 input[type="submit"] {
@@ -414,20 +411,17 @@ form button {
     font-size: 1em;
     max-width: 100%;
     gap: 0px;
-    overflow-x: hidden;
 }
 .container > main,
 .container > header,
 .container > footer {
     height: 100%;
     display: grid;
-    place-items: center;
-    max-width: 100%;
+    grid-template-columns: repeat(3, 1fr);
+    width: 100vw;
     gap: 0px;
-    overflow-x: hidden;
 }
 .sign-header {
-    height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -518,6 +512,167 @@ form button {
 }
 .register-header_body form button {
     text-align: center;
+}
+.sidebar-left {
+    background-color: var(--light_grey-color);
+}
+.sidebar-left_header {
+    display: flex;
+    justify-content: flex-start;
+    background-color: var(--darker_grey-color);
+    height: clamp(30px, 40px, 100%);
+}
+.sidebar-right_header label {
+    cursor: none; /* temp to be removed/replaced */
+}
+
+.sidebar-left_header img {
+    object-fit: cover;
+    width: 30px;
+    height: 30px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
+.section-header {
+    height: clamp(30px, 40px, 100%);
+    background-color: var(--dark_grey-color);
+}
+.sidebar-right {
+    background-color: var(--light_grey-color);
+}
+.sidebar-right_header {
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--darker_grey-color);
+    height: clamp(30px, 40px, 100%);
+}
+.sidebar-right_header svg {
+    margin-right: 10px;
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+/* .sidebar-right on loggedHome.blade.php */
+.menu-wrapper {
+    position: relative;
+}
+.menu-wrapper::after {
+    cursor: pointer;
+}
+.menu-toggle-checkbox {
+    display: none;
+}
+.menu-toggle-checkbox:checked + label .menu-wrapper::after {
+    content: "";
+    position: absolute;
+    top: 40px;
+    left: calc(-50vw + 80px);
+    width: 458px;
+    height: 80vh;
+    background-color: var(--very-dark_grey-color);
+    /* cursor: pointer; */
+}
+.section-header {
+    display: grid;
+}
+.section-main {
+    padding: 5px;
+}
+.section-main a,
+.section-main img,
+.section-main p {
+    display: inline-block;
+    vertical-align: middle;
+}
+.section {
+    position: relative; /* for .create-post on createPost.blade.php */
+    cursor: pointer;
+}
+/* createPost.blade.php */
+.create-post {
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.9);
+    color: white;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 500ms ease;
+
+    display: grid;
+    place-items: center;
+}
+.create-post:target {
+    visibility: visible;
+    opacity: 1;
+}
+.create-post .post {
+    width: 100%;
+    height: 100%;
+}
+.create-post form {
+    height: 100%;
+    width: 100%;
+    background-color: var(--very-dark_grey-color);
+    display: grid;
+    grid-template-columns: 30% 40% 5% 30%;
+    grid-auto-rows: 100px;
+    justify-content: space-around;
+    align-items: flex-start;
+    gap: 10px;
+    padding-top: 30px;
+    font-size: large;
+}
+.create-post form h1 {
+    grid-column: 2/3;
+    height: 100%;
+}
+.create-post form a {
+    grid-column: 3/4;
+    display: inline-block;
+    text-decoration: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--very-light_grey-color);
+    color: black;
+
+    display: grid;
+    place-items: center;
+}
+.create-post form textarea {
+    grid-column: 2/3;
+    height: 100%;
+    color: black;
+    font-size: large;
+    padding: 5px;
+    text-wrap: wrap;
+    resize: none;
+}
+.create-post form button {
+    grid-column: 2/3;
+    text-align: center;
+    display: inline-block;
+    margin-right: auto;
+    margin-left: auto;
+    height: 50%;
+    width: 80%;
+    color: black;
+    font-size: large;
+}
+.section-main img {
+    justify-self: center;
+    border-radius: 50%;
+    object-fit: cover;
+    width: 40px;
+    height: 40px;
+    background-color: var(--light_grey-color);
+}
+.section-main p {
+    margin-left: 10px;
 }
 
 /* MEDIA QUERY BREAKPOINT ====================================================
