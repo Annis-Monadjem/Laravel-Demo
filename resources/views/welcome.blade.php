@@ -7,15 +7,15 @@
         <div class="sign-header_body">
             <form action="#" method="POST">
                 <label for="email"></label>
-                <input type="text" placeholder="Email or phone number" name="email" id="email">
+                <input type="text" placeholder="Email address" name="email" id="email" class="input">
 
                 <label for="password"></label>
-                <input type="password" placeholder="Password" name="password" id="password">
+                <input type="password" placeholder="Password" name="password" id="password" class="input">
 
-                <button type="submit">Log In</button>
+                <button type="submit" class="button">Log In</button>
             </form>
             <a href="#">Forgot Password?</a>
-            <a href="/register" class="btn">Create new account</a>
+            <a href="/register" class="button">Create new account</a>
         </div>
     </div>
 </x-authLayout>
