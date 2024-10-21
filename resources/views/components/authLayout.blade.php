@@ -12,11 +12,7 @@
 
     <body>
         <div class="container">
-            <header></header>
-            <main>
-                {{ $slot }}
-            </main>
-            <footer></footer>
+            {{ $slot }}
         </div>
     </body>
 
