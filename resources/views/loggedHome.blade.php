@@ -11,7 +11,7 @@
         <section class="section-main">
             <a href="#create-post">
                 <img src="#" alt="">
-                <p>What is on your mind?</p>
+                <p>What is on your mind, {{ $user->firstname }}?</p>
             </a>
         </section>
         @include('components.createPost')

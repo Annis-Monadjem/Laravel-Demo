@@ -62,7 +62,7 @@ class UserController extends Controller
     public function showMainPage()
     {
         if (!Auth::check()) return redirect()->route('publicSite');
-        return view('loggedHome');
+        return view('loggedHome', ['user' => Auth::user()]);
     }
     public function logout(Request $request)
     {
