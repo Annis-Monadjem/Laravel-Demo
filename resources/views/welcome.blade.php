@@ -6,6 +6,7 @@
         </div>
         <div class="sign-header_body">
             <form action="#" method="POST">
+                @csrf
                 <label for="email"></label>
                 <input type="text" placeholder="Email address" name="email" id="email" class="input">
 
