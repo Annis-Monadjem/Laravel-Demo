@@ -529,10 +529,6 @@ form button {
     background-color: var(--darker_grey-color);
     height: clamp(30px, 40px, 100%);
 }
-.sidebar-right_header label {
-    cursor: none; /* temp to be removed/replaced */
-}
-
 .sidebar-left_header img {
     object-fit: cover;
     width: 30px;
@@ -554,6 +550,9 @@ form button {
     background-color: var(--darker_grey-color);
     height: clamp(30px, 40px, 100%);
 }
+.sidebar-right_header label {
+    cursor: pointer;
+}
 .sidebar-right_header svg {
     margin-right: 10px;
     margin-top: 8px;
@@ -563,21 +562,25 @@ form button {
 .menu-wrapper {
     position: relative;
 }
-.menu-wrapper::after {
+.sidebar-right_header .modal {
     cursor: pointer;
+    visibility: hidden;
+    opacity: 0;
+    width: 0px;
 }
 .menu-toggle-checkbox {
     display: none;
 }
-.menu-toggle-checkbox:checked + label .menu-wrapper::after {
+.menu-toggle-checkbox:checked + label .modal {
     content: "";
+    visibility: visible;
+    opacity: 1;
     position: absolute;
     top: 40px;
-    left: calc(-50vw + 80px);
-    width: 458px;
+    right: 2px;
+    width: 350px;
     height: 80vh;
     background-color: var(--very-dark_grey-color);
-    /* cursor: pointer; */
 }
 .section-header {
     display: grid;
