@@ -5,8 +5,15 @@
             <h3>Create a new account</h3>
             <p>Its quick and easy.</p>
         </div>
+        @if ($errors->has('msg'))
+            <div class="error-message">
+                {{ $errors->first('msg') }}
+            </div>
+        @endif
+
         <div class="register-header_body">
-            <form action="#" method="POST">
+            <form action="/register" method="POST">
+                @csrf
                 <input type="text" placeholder="First name" name="firstname" id="firstname" class="input">
                 <input type="text" placeholder="Last name" name="lastname" id="lastname" class="input">
                 <label for="birthdate" class="row"><small>Birthday</small></label>

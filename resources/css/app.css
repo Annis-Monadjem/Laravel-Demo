@@ -401,6 +401,13 @@ form button {
     display: inline-block;
 }
 
+/* Error messages */
+.error-message {
+    color: red;
+    font-size: medium;
+    outline: 1px solid red;
+    background-color: black;
+}
 /* MEDIA QUERY BREAKPOINT (MOBILE FIRST) =====================================
      < 640px = 40em: Small Phones (Mobile)
    =========================================================================== */
