@@ -8,7 +8,7 @@
             <form action="#" method="POST">
                 @csrf
                 <label for="email"></label>
-                <input type="text" placeholder="Email address" name="email" id="email" class="input">
+                <input autofocus type="text" placeholder="Email address" name="email" id="email" class="input">
 
                 <label for="password"></label>
                 <input type="password" placeholder="Password" name="password" id="password" class="input">

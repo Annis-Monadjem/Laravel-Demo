@@ -9,12 +9,12 @@
     <section class="section" id="section">
         <header class="section-header"></header>
         <section class="section-main">
-            <a href="#create-post">
+            <a href="/posts/create">
                 <img src="#" alt="">
                 <p>What is on your mind, {{ $user->firstname }}?</p>
             </a>
+            <a class="link-to-posts" href="/posts/index">List of Posts</a>
         </section>
-        @include('components.createPost')
     </section>
     <sidebar class="sidebar-right">
         <header class="sidebar-right_header">

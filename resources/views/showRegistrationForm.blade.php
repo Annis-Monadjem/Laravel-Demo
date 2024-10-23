@@ -14,7 +14,7 @@
         <div class="register-header_body">
             <form action="/register" method="POST">
                 @csrf
-                <input type="text" placeholder="First name" name="firstname" id="firstname" class="input">
+                <input autofocus type="text" placeholder="First name" name="firstname" id="firstname" class="input">
                 <input type="text" placeholder="Last name" name="lastname" id="lastname" class="input">
                 <label for="birthdate" class="row"><small>Birthday</small></label>
                 <input type="date" name="birthdate" id="birthdate" class="input"

@@ -19,7 +19,8 @@ body {
     margin: 0;
     padding: 0;
     display: grid;
-    place-items: center;
+    justify-content: center;
+    align-items: start;
     overflow-x: hidden;
 }
 *,
@@ -355,21 +356,9 @@ button {
     background-color: #f0f0f0;
     cursor: pointer;
 }
-
-a:hover,
-button:hover,
-input:hover,
-a:focus,
-button:focus,
-input:focus {
-    background-color: #e0e0e0;
-    outline: none;
-    border-color: var(--dark_grey-color);
-}
 a {
     display: inline-block;
 }
-
 input[type="submit"] {
     appearance: none;
     border: none;
@@ -587,91 +576,15 @@ form button {
 }
 .section-main {
     padding: 5px;
+    display: grid;
+    justify-content: center;
+    align-content: space-between;
+    height: 12vh;
 }
-.section-main a,
 .section-main img,
 .section-main p {
     display: inline-block;
     vertical-align: middle;
-}
-.section {
-    position: relative; /* for .create-post on createPost.blade.php */
-    cursor: pointer;
-}
-/* createPost.blade.php */
-.create-post {
-    position: fixed;
-    background-color: rgba(0, 0, 0, 0.9);
-    color: white;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 500ms ease;
-
-    display: grid;
-    place-items: center;
-}
-.create-post:target {
-    visibility: visible;
-    opacity: 1;
-}
-.create-post .post {
-    width: 100%;
-    height: 100%;
-}
-.create-post form {
-    height: 100%;
-    width: 100%;
-    background-color: var(--very-dark_grey-color);
-    display: grid;
-    grid-template-columns: 30% 40% 5% 30%;
-    grid-auto-rows: 100px;
-    justify-content: space-around;
-    align-items: flex-start;
-    gap: 10px;
-    padding-top: 30px;
-    font-size: large;
-}
-.create-post form h1 {
-    grid-column: 2/3;
-    height: 100%;
-}
-.create-post form a {
-    grid-column: 3/4;
-    display: inline-block;
-    text-decoration: none;
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    background-color: var(--very-light_grey-color);
-    color: black;
-
-    display: grid;
-    place-items: center;
-}
-.create-post form textarea {
-    grid-column: 2/3;
-    height: 100%;
-    color: black;
-    font-size: large;
-    padding: 5px;
-    text-wrap: wrap;
-    resize: none;
-}
-.create-post form button {
-    grid-column: 2/3;
-    text-align: center;
-    display: inline-block;
-    margin-right: auto;
-    margin-left: auto;
-    height: 50%;
-    width: 80%;
-    color: black;
-    font-size: large;
 }
 .section-main img {
     justify-self: center;
@@ -683,6 +596,203 @@ form button {
 }
 .section-main p {
     margin-left: 10px;
+}
+
+/* createPost.blade.php */
+.post-container {
+    display: grid;
+    justify-content: center;
+    height: 100%;
+}
+.create-post {
+    display: grid;
+    place-items: center;
+}
+.create-post form {
+    width: 100%;
+    background-color: var(--very-dark_grey-color);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 50px 100px;
+    grid-auto-rows: 100%;
+    justify-items: start;
+    align-items: center;
+}
+.create-post form h1 {
+    grid-column: 1/4;
+    justify-self: center;
+    color: white;
+}
+.create-post form a {
+    grid-column: 4/5;
+    text-decoration: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--very-light_grey-color);
+    color: black;
+    text-align: center;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 3px;
+}
+.create-post form textarea {
+    grid-column: 1/5;
+    height: 80%;
+    width: 95%;
+    margin-right: auto;
+    margin-left: auto;
+    color: black;
+    padding: 5px;
+    resize: none;
+}
+.create-post form button {
+    grid-column: 2/4;
+    text-align: center;
+    color: black;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+/* loggedHome.blade.php */
+.link-to-posts {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    margin-top: 20px;
+}
+.link-to-posts:hover {
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+/* posts/index.blade.php */
+.posts-list {
+    width: auto;
+    margin: 10px;
+    overflow: hidden;
+}
+.posts-list h2,
+.posts-list a.home {
+    text-align: center;
+}
+.posts-list a {
+    display: block;
+}
+.posts-list ol {
+    list-style: none;
+    overflow: hidden;
+}
+.posts-list .home {
+    text-decoration: none;
+}
+.posts-list .home:hover {
+    text-decoration: underline;
+    font-weight: 600;
+}
+.posts-list ol > li {
+    padding: 10px;
+    border: 1px solid var(--very-dark_grey-color);
+    background-color: var(--light_grey-color);
+    border-radius: 4px;
+    margin: 10px;
+    width: auto;
+    overflow: hidden;
+}
+.posts-list span {
+    user-select: none;
+}
+.posts-list .edit-post {
+    text-decoration: none;
+    display: inline-block;
+}
+.posts-list .edit-post:hover {
+    color: darkred;
+}
+.posts-list .name {
+    text-transform: capitalize;
+}
+.posts-list .content {
+    font-weight: 600;
+}
+.posts-list ol {
+    counter-reset: list-counter;
+}
+.posts-list li {
+    counter-increment: list-counter;
+}
+.posts-list li::before {
+    content: counter(list-counter) ". ";
+}
+.posts-list form.delete {
+    display: inline-block;
+}
+.posts-list form.delete button {
+    text-transform: capitalize;
+    color: red;
+    font-weight: 600;
+    padding: 0;
+    border: none;
+    background: transparent;
+    display: inline-block;
+    text-decoration: none;
+    opacity: 50%;
+    transition: opacity 300ms ease-out;
+}
+.posts-list form.delete button:hover {
+    opacity: 100%;
+}
+
+/* posts/edit.blade.php */
+.edit-post {
+    display: grid;
+    place-items: center;
+}
+.edit-post form {
+    width: 100%;
+    background-color: var(--very-dark_grey-color);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 50px 100px;
+    grid-auto-rows: 100%;
+    justify-items: start;
+    align-items: center;
+}
+.edit-post form h1 {
+    grid-column: 1/4;
+    justify-self: center;
+    color: white;
+}
+.edit-post form a {
+    grid-column: 4/5;
+    text-decoration: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: var(--very-light_grey-color);
+    color: black;
+    text-align: center;
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 3px;
+}
+.edit-post form textarea {
+    grid-column: 1/5;
+    height: 80%;
+    width: 95%;
+    margin-right: auto;
+    margin-left: auto;
+    color: black;
+    padding: 5px;
+    resize: none;
+}
+.edit-post form button {
+    grid-column: 2/4;
+    text-align: center;
+    color: black;
+    font-weight: 700;
+    margin-bottom: 10px;
 }
 
 /* MEDIA QUERY BREAKPOINT ====================================================

@@ -7,7 +7,7 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link rel="shortcut icon" sizes="16x16" type="image/x-icon" href="{{ asset('favicon16x16.png') }}">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-        <title>Fakeface home</title>
+        <title>FF Home</title>
     </head>
 
     <body>
